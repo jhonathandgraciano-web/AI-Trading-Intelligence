@@ -11,6 +11,7 @@ Dashboard web responsivo para monitorização de mercados e simulação educativ
 - Alertas no painel e notificações do navegador mediante autorização.
 - Capital e risco por posição configuráveis para a simulação.
 - Interface adaptável a telemóvel.
+- Estrutura PWA com manifesto, ícone e cache da interface para instalação no ecrã inicial.
 
 ## Publicação Cloudflare
 O ficheiro `wrangler.toml` configura os ativos estáticos em `./public`. O ponto de entrada do site é `public/index.html`. O comando de deploy configurado no projeto Cloudflare é `npx wrangler deploy`.
