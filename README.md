@@ -1,21 +1,30 @@
 # AI Trading Intelligence
 
-Aplicativo independente e adaptável a celular para monitorização de mercados.
+Dashboard web responsivo para monitorização de mercados e simulação educativa de estratégias técnicas.
 
-## Implementação inicial
-- Cotações públicas de criptoativos via Binance REST + WebSocket.
-- Análise técnica experimental com EMA 9/21, RSI 14 e confirmação de volume em candles de 5 minutos.
-- Estados de pré-alerta, entrada e saída apresentados no painel.
-- Simulação local de posições (paper trading); não envia ordens.
-- Lista inicial de 10 ações dos EUA, ainda sem feed conectado nesta versão.
+## O que está implementado
+- 10 pares de criptoativos via Binance REST e WebSocket público.
+- Estratégia experimental EMA 9/21, RSI 14 e filtro de volume com candles de 5 minutos.
+- Estados de entrada, pré-alerta, saída e indisponibilidade de dados.
+- Paper trading local com abertura/fecho simulado, posições abertas, P/L realizado e não realizado.
+- 10 ações dos EUA com integração opcional Finnhub (chave do próprio utilizador).
+- Alertas no painel e notificações do navegador mediante autorização.
+- Capital e risco por posição configuráveis para a simulação.
+- Interface adaptável a telemóvel.
 
-## Limitações importantes
-- A cotação cripto é atualizada via feed público, mas a estratégia só é reavaliada após o fechamento de candles de 5 minutos.
-- A integração de ações exige um fornecedor e uma chave API; cotações gratuitas podem ser atrasadas ou limitadas.
-- Não há ligação a corretora, execução automática real, autenticação de utilizadores ou notificações push nesta versão.
-- Os sinais são regras técnicas experimentais, não previsões nem garantias de lucro.
+## Publicação Cloudflare
+O ficheiro `wrangler.toml` configura os ativos estáticos em `./public`. O ponto de entrada do site é `public/index.html`. O comando de deploy configurado no projeto Cloudflare é `npx wrangler deploy`.
 
-## Executar
-Abra `index.html` num navegador moderno ou publique como site estático (por exemplo, Cloudflare Pages).
+## Configurar ações
+1. Criar uma chave API no fornecedor Finnhub.
+2. No separador **Ações EUA**, inserir a chave e guardar.
+3. Carregar em **Atualizar ações**.
+A disponibilidade dos candles/quotes depende do plano, do mercado e dos limites do fornecedor. A chave fica no armazenamento local do navegador; não é enviada para este repositório.
 
-Nunca coloque chaves de corretora ou segredos de negociação no código do navegador. Não use o painel como única base para decisões financeiras.
+## Limitações e segurança
+- A aplicação não se liga a corretoras nem envia ordens reais.
+- Paper trading é local ao navegador/dispositivo e pode ser perdido se os dados locais forem apagados.
+- Não existe autenticação de utilizadores nem sincronização entre dispositivos.
+- As cotações dependem de fornecedores externos, conectividade, CORS, limites e disponibilidade.
+- Os sinais são regras técnicas experimentais; não são previsões, aconselhamento financeiro ou garantia de lucro.
+- Nunca introduza palavras-passe, chaves privadas ou credenciais de corretoras neste painel.
