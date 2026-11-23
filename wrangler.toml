@@ -7,7 +7,7 @@ directory = "./public"
 binding = "ASSETS"
 
 [triggers]
-crons = ["*/5 * * * *"]
+crons = ["0 * * * *"]
 
 [[durable_objects.bindings]]
 name = "TRADING_STATE"
