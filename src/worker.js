@@ -16,6 +16,6 @@ export class TradingState {
  event(st,type,s,message){st.events.unshift({type,symbol:s,message,time:Date.now()})}
 }
 export default {
- async fetch(request,env){const u=new URL(request.url);if(u.pathname.startsWith("/api/")){const id=env.TRADING_STATE.idFromName("global");const stub=env.TRADING_STATE.get(id);if(u.pathname==="/api/state")return stub.fetch("https://state/state");if(u.pathname==="/api/run"&&request.method==="POST")return stub.fetch("https://state/run",{method:"POST"});return json({error:"not found"},404)}return env.ASSETS.fetch(request)},
+ async fetch(request,env){const u=new URL(request.url);if(u.pathname==="/api/health")return json({ok:true,service:"ai-trading-intelligence",mode:"paper-trading",cron:"0 * * * *",time:Date.now()});if(u.pathname.startsWith("/api/")){const id=env.TRADING_STATE.idFromName("global");const stub=env.TRADING_STATE.get(id);if(u.pathname==="/api/state")return stub.fetch("https://state/state");if(u.pathname==="/api/run"&&request.method==="POST")return stub.fetch("https://state/run",{method:"POST"});return json({error:"not found"},404)}return env.ASSETS.fetch(request)},
  async scheduled(event,env,ctx){const id=env.TRADING_STATE.idFromName("global");const stub=env.TRADING_STATE.get(id);ctx.waitUntil(stub.fetch("https://state/run",{method:"POST"}))}
 };
