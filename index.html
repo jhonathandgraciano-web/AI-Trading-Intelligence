@@ -65,6 +65,8 @@ function drawTradeChart(s){
   out+='<circle cx="'+xx+'" cy="'+yy+'" r="8" fill="#20d477" stroke="#fff" stroke-width="3"/><path d="M '+xx+' '+(yy-8)+' l -24 -38" stroke="#20d477" stroke-width="2"/><rect x="'+(xx-105)+'" y="'+(yy-66)+'" width="88" height="28" rx="8" fill="#0b8f4a"/><text x="'+(xx-96)+'" y="'+(yy-47)+'" fill="white" font-weight="bold" font-size="14">ENTRADA</text>';
  }else{
   const latest=signals[s]?.label||'A ANALISAR';out+='<text x="26" y="27" fill="#d9ad48" font-size="16" font-weight="bold">'+s+' · '+latest+' · SEM POSIÇÃO ABERTA</text>';
+  const done=closedTrades.find(t=>t.symbol===s);
+  if(done){let ix=data.findIndex(k=>+k[0]>=done.exitTime);if(ix<0)ix=data.length-1;let xx=x(ix),yy=y(done.exit);out+='<circle cx="'+xx+'" cy="'+yy+'" r="8" fill="#f04452" stroke="#fff" stroke-width="3"/><path d="M '+xx+' '+(yy-8)+' l 20 -34" stroke="#f04452" stroke-width="2"/><rect x="'+(xx+15)+'" y="'+(yy-65)+'" width="78" height="27" rx="7" fill="#b91c2b"/><text x="'+(xx+23)+'" y="'+(yy-47)+'" fill="#fff" font-size="14" font-weight="bold">SAÍDA</text>'}
  }
  const last=data.length-1,px=+data[last][4];out+='<text x="26" y="26" fill="#f4f4f4" font-size="17" font-weight="bold">'+s+' · 5m</text>';
  if(!pos)out+='<text x="26" y="48" fill="#aeb2bc" font-size="12">O robô ainda não confirmou entrada para este ativo</text>';
